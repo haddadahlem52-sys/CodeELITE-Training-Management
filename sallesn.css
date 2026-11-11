@@ -1,0 +1,111 @@
+/* ===== BODY ===== */
+body {
+    background: #f5f1e6 !important; /* beige */
+    font-family: Arial, sans-serif;
+}
+
+/* ===== HEADER ===== */
+header {
+    background: #000000 !important; /* noir */
+}
+
+header h1 {
+    color: #ffffff;
+}
+
+header a {
+    color: #f5f1e6 !important; /* beige */
+    text-decoration: none;
+}
+
+header a:hover {
+    color: #ffffff !important;
+}
+
+/* ===== CARD ===== */
+.card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff; /* blanc */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* HEADER CARD */
+.card-header {
+    background: #3e2c23 !important; /* marron */
+    color: #ffffff !important;
+    border: none;
+}
+
+/* ===== FORM ===== */
+form {
+    background: #f5f1e6; /* beige */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* INPUTS */
+.form-control {
+    border-radius: 6px;
+    border: 1px solid #d6cfc2;
+}
+
+.form-control:focus {
+    border-color: #3e2c23;
+    box-shadow: 0 0 5px rgba(62,44,35,0.3);
+}
+
+/* ===== BOUTONS ===== */
+form button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #000000; /* noir */
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background-color: #3e2c23; /* marron */
+}
+
+/* boutons bootstrap override */
+.btn-success {
+    background-color: #000000 !important;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #3e2c23 !important;
+}
+
+.btn-secondary {
+    background-color: #d6cfc2 !important; /* beige */
+    color: #000;
+    border: none;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: #000000 !important;
+    color: #f5f1e6;
+}
+
+/* ===== CARD FOOTER ===== */
+.card-footer {
+    background: #f5f1e6;
+}
+
+/* boutons actions */
+.card-footer .btn-warning { background-color: #c2a27c !important; } /* beige foncé */
+.card-footer .btn-danger  { background-color: #000000 !important; } /* noir */
+.card-footer .btn-info    { background-color: #8c7b6b !important; } /* beige gris */
+
+/* hover */
+.card-footer button:hover {
+    opacity: 0.85;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Admin</title>
+    <link rel="stylesheet" href="admin1.css">
+
+    <script>
+        function changerPage(selectElement) {
+            var url = selectElement.value;
+            if (url !== "") {
+                document.getElementsByName("cible")[0].src = url;
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <aside class="sidebar">
+        <h2>Forma Up</h2>
+
+        <select onchange="changerPage(this)">
+            <option value="">-- Formateurs --</option>
+            <option value="gestionFormateur.html">Ajouter</option>
+            <option value="supprimer_formateur.php">Supprimer</option>
+        </select>
+
+        <select onchange="changerPage(this)">
+            <option value="">-- Salles --</option>
+            <option value="gestion_salle.html">Ajouter</option>
+            <option value="modifier_salle.php">Modifier</option>
+            <option value="supprimer_salle.php">Supprimer</option>
+            <option value="recherche.html">Rechercher</option>
+        </select>
+
+        <select onchange="changerPage(this)">
+            <option value="">-- Participants --</option>
+            <option value="activer.php">Activer</option>
+            <option value="activer.php">Désactiver</option>
+            <option value="consulter.php">Consulter</option>
+        </select>
+
+        <select onchange="changerPage(this)">
+            <option value="">-- Formations --</option>
+            <option value="ajouterF.html">Ajouter</option>
+            <option value="modifierF.php">Modifier</option>
+            <option value="modifierF.php">Supprimer</option>
+        </select>
+
+        <select onchange="changerPage(this)">
+            <option value="">-- Sessions --</option>
+            <option value="ajouter_session.php">Ajouter</option>
+        </select>
+    </aside>
+
+    <main class="content">
+        <iframe src="recherche.html" name="cible"></iframe>
+    </main>
+
+</div>
+
+</body>
+</html>

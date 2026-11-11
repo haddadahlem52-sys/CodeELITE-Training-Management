@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Inscription Formation</title>
+<script src="inscription.js"></script>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f1ea; /* beige clair */
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Carte formulaire */
+.container {
+    width: 420px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid #eee;
+}
+
+/* Titre */
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #1a1a1a;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+/* Labels */
+label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Inputs */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 16px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: #fafafa;
+    font-size: 14px;
+    transition: 0.3s;
+    color: #111;
+}
+
+/* Focus */
+input:focus, select:focus {
+    border-color: #000;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+}
+
+/* Bouton */
+button {
+    width: 100%;
+    padding: 13px;
+    background: #111; /* noir */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+/* petit effet clean */
+.container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Inscription</h2>
+
+    <form id="inscriptionForm" action="traitement_inscription.php" method="POST">
+
+        <label>Nom</label>
+        <input type="text" name="nom" required>
+
+        <label>Prénom</label>
+        <input type="text" name="prenom" required>
+
+        <label>Adresse email</label>
+        <input type="email" name="email" required>
+
+        <label>Numéro de téléphone</label>
+        <input type="tel" name="telephone" required>
+
+        <label>Niveau d'études / Prérequis</label>
+        <select name="niveau" required>
+            <option value="">-- Choisir --</option>
+            <option>Bac</option>
+            <option>Licence</option>
+            <option>Master</option>
+            <option>Autre</option>
+        </select>
+
+        <!-- Formation choisie -->
+        <input type="hidden" name="formation" value="Formation X">
+
+        <!-- Session choisie -->
+        <input type="hidden" name="session" value="5">
+
+        <button type="submit">Passer au paiement</button>
+
+    </form>
+</div>
+
+</body>
+</html>

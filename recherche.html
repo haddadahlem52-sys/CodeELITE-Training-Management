@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche des salles</title>
+
+    <style>
+        :root {
+            --beige:        #f5f1e6;
+            --beige-mid:    #e8e2d4;
+            --beige-dark:   #d6c7a1;
+            --noir:         #1a1a1a;
+            --noir-light:   #2e2e2e;
+            --blanc:        #ffffff;
+            --gris-texte:   #5a5a5a;
+            --gris-bordure: #ddd8ce;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--beige);
+            min-height: 100vh;
+            padding: 48px 24px;
+            color: var(--noir);
+        }
+
+        main {
+            width: 90%;
+            max-width: 860px;
+            margin: 0 auto;
+            background: var(--blanc);
+            padding: 36px 32px;
+            border-radius: 2px;
+            border: 1px solid var(--gris-bordure);
+        }
+
+        /* ===== TITRE ===== */
+        h2 {
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--noir);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--gris-bordure);
+        }
+
+        /* ===== BARRE DE RECHERCHE ===== */
+        .search-box {
+            margin-bottom: 16px;
+        }
+
+        .search-box input {
+            width: 100%;
+        }
+
+        /* ===== CONTRÔLES ===== */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 32px;
+            align-items: center;
+        }
+
+        .controls select,
+        .controls input {
+            flex: 1;
+            min-width: 140px;
+        }
+
+        /* ===== INPUTS & SELECTS ===== */
+        input[type="text"],
+        select {
+            padding: 10px 14px;
+            border: 1px solid var(--gris-bordure);
+            border-radius: 2px;
+            background: var(--blanc);
+            color: var(--noir);
+            font-size: 13px;
+            font-family: 'Arial', sans-serif;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            transition: border-color 0.15s;
+        }
+
+        input[type="text"]::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: var(--beige-dark);
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235a5a5a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 32px;
+        }
+
+        /* ===== BOUTON ===== */
+        button[type="submit"] {
+            background: var(--noir);
+            color: var(--blanc);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-family: 'Arial', sans-serif;
+            transition: background 0.15s;
+            white-space: nowrap;
+        }
+
+        button[type="submit"]:hover {
+            background: var(--noir-light);
+        }
+
+        /* ===== LISTE DES SALLES ===== */
+        #listeSalles {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        /* ===== CARTE SALLE ===== */
+        .salle {
+            background: var(--beige);
+            padding: 18px 20px;
+            border-radius: 2px;
+            border: 1px solid var(--gris-bordure);
+            border-left: 3px solid var(--beige-dark);
+            transition: background 0.12s;
+        }
+
+        .salle:hover {
+            background: var(--beige-mid);
+        }
+
+        .salle .nom {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--noir);
+            margin-bottom: 6px;
+        }
+
+        .salle .detail {
+            font-size: 12px;
+            color: var(--gris-texte);
+            margin-bottom: 4px;
+        }
+
+        .salle .badge-dispo {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 3px 12px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 1px;
+        }
+
+        .badge-disponible {
+            background: var(--beige-mid);
+            color: var(--noir);
+            border: 1px solid var(--gris-bordure);
+        }
+
+        .badge-indisponible {
+            background: #f0e6e6;
+            color: #4a1a1a;
+            border: 1px solid #dfc8c8;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            #listeSalles {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .controls select,
+            .controls input {
+                width: 100%;
+            }
+
+            button[type="submit"] {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main>
+    <form name="f2" method="POST" action="recherche.php">
+
+        <!-- TITRE -->
+        <h2>Recherche des salles</h2>
+
+        <!-- BARRE DE RECHERCHE -->
+        <div class="search-box">
+            <input type="text" id="search" name="search" placeholder="Rechercher une salle...">
+        </div>
+
+        <!-- FILTRES -->
+        <div class="controls">
+
+            <select id="filterType" name="filterType">
+                <option value="">Tous les types</option>
+                <option value="informatique">Informatique</option>
+                <option value="conference">Conférence</option>
+                <option value="classique">Classique</option>
+            </select>
+
+            <select id="filterStatut" name="filterStatut">
+                <option value="">Tous les statuts</option>
+                <option value="Disponible">Disponible</option>
+                <option value="Indisponible">Indisponible</option>
+            </select>
+
+            <select id="sortSelect" name="sortSelect">
+                <option value="">Trier par</option>
+                <option value="nom">Nom</option>
+                <option value="capacite">Capacité</option>
+                <option value="statut">Statut</option>
+            </select>
+
+            <select id="sortOrder" name="sortOrder">
+                <option value="asc">Ascendant</option>
+                <option value="desc">Descendant</option>
+            </select>
+
+            <button type="submit">Rechercher</button>
+
+        </div>
+
+        <!-- LISTE -->
+        <section>
+            <div id="listeSalles"></div>
+        </section>
+
+    </form>
+</main>
+
+</body>
+</html>

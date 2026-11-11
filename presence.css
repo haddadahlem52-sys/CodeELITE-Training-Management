@@ -1,0 +1,100 @@
+
+    body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; }
+
+    /* ── entête ── */
+    .entete {
+      background: #1a237e;
+      color: white;
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .contenu { max-width: 900px; margin: 25px auto; padding: 0 15px; }
+
+    /* ── messages ── */
+    .msg-succes {
+      background: #e8f5e9;
+      border-left: 4px solid #4caf50;
+      padding: 12px 16px;
+      border-radius: 6px;
+      color: #2e7d32;
+      margin-bottom: 16px;
+    }
+    .msg-alerte {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 12px 16px;
+      border-radius: 6px;
+      color: #e65100;
+      margin-bottom: 16px;
+    }
+
+    /* ── carte blanche ── */
+    .carte {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .carte h2 { color: #1a237e; font-size: 1rem; margin-bottom: 14px; }
+
+    /* ── liens sessions ── */
+    .session-lien {
+      display: inline-block;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 5px;
+      text-decoration: none;
+      color: #333;
+      font-size: 0.88rem;
+    }
+    .session-lien:hover { border-color: #1a237e; background: #f0f4ff; }
+    .session-lien.active { border-color: #1a237e; background: #e8eaf6; font-weight: bold; }
+
+    /* ── tableau ── */
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    thead tr { background: #1a237e; color: white; }
+    th, td { padding: 11px 14px; text-align: left; }
+    tbody tr { border-bottom: 1px solid #eee; }
+    tbody tr:hover { background: #fafafa; }
+
+    /* ── select ── */
+    select {
+      padding: 7px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    select.present { border-color: #4caf50; color: #2e7d32; background: #f1f8e9; }
+    select.absent  { border-color: #f44336; color: #c62828; background: #ffebee; }
+    select.retard  { border-color: #ff9800; color: #e65100; background: #fff3e0; }
+
+    /* ── champ justification caché par défaut ── */
+    .justif { display: none; margin-top: 5px; }
+    .justif input {
+      width: 100%;
+      padding: 6px 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 0.82rem;
+    }
+    .justif.visible { display: block; }
+
+    /* ── bouton enregistrer ── */
+    .btn-enregistrer {
+      display: block;
+      margin: 18px 0 0 auto;
+      padding: 11px 28px;
+      background: #1a237e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .btn-enregistrer:hover { background: #283593; }

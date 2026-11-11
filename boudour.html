@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Formations</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --noir:        #0F0E17;
+            --beige:       #E8DCC8;
+            --beige-light: #F5F0E8;
+            --white:       #FFFFFF;
+            --muted:       #7a7060;
+            --border:      rgba(15,14,23,0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--beige-light);
+            font-family: 'DM Sans', sans-serif;
+            color: var(--noir);
+            min-height: 100vh;
+        }
+
+        /* ── Stats ── */
+        .stat-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .stat-card:hover {
+            box-shadow: 0 8px 24px rgba(15,14,23,0.09);
+            transform: translateY(-2px);
+        }
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--beige);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            color: var(--noir);
+        }
+        .stat-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: var(--muted);
+            margin-bottom: 0.2rem;
+        }
+        .stat-value {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--noir);
+            line-height: 1;
+        }
+
+        /* ── Main card ── */
+        .main-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .main-card-header {
+            padding: 1.25rem 1.75rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .main-card-header h4 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--noir);
+            margin: 0;
+        }
+
+        /* ── Search ── */
+        .search-wrap {
+            position: relative;
+        }
+        .search-wrap i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+        .search-wrap input {
+            padding-left: 38px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            background: var(--beige-light);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            color: var(--noir);
+            height: 40px;
+            width: 100%;
+            outline: none;
+            transition: border-color 0.18s;
+        }
+        .search-wrap input::placeholder { color: var(--muted); }
+        .search-wrap input:focus {
+            border-color: var(--noir);
+            background: var(--white);
+        }
+
+        /* ── Table ── */
+        .table {
+            margin: 0;
+            font-size: 0.875rem;
+        }
+        .table thead th {
+            background: var(--noir);
+            color: var(--beige);
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            padding: 0.85rem 1rem;
+            border: none;
+        }
+        .table tbody tr {
+            border-bottom: 1px solid var(--beige);
+            transition: background 0.15s;
+        }
+        .table tbody tr:last-child { border-bottom: none; }
+        .table tbody tr:hover { background: var(--beige-light); }
+        .table tbody td {
+            padding: 0.9rem 1rem;
+            color: var(--noir);
+            vertical-align: middle;
+            border: none;
+        }
+
+        /* Badge type */
+        .type-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 999px;
+            letter-spacing: 0.03em;
+        }
+        .type-presentiel {
+            background: var(--noir);
+            color: var(--beige);
+        }
+        .type-enligne {
+            background: var(--beige);
+            color: var(--noir);
+            border: 1px solid rgba(15,14,23,0.15);
+        }
+
+        /* Action buttons */
+        .btn-action {
+            background: var(--noir);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.78rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.18s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .btn-action:hover {
+            background: #2a2940;
+            color: var(--white);
+        }
+        .btn-action-outline {
+            background: transparent;
+            color: var(--noir);
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.78rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.18s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .btn-action-outline:hover {
+            background: var(--beige);
+            border-color: var(--noir);
+            color: var(--noir);
+        }
+
+        /* Add button */
+        .btn-add {
+            background: var(--noir);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            padding: 0.5rem 1.1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.18s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .btn-add:hover {
+            background: #2a2940;
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-4" style="max-width: 1000px;">
+
+    <!-- Stats -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+                <div>
+                    <div class="stat-label">Total Formations</div>
+                    <div class="stat-value" id="statTotal">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-wifi"></i></div>
+                <div>
+                    <div class="stat-label">En Ligne</div>
+                    <div class="stat-value" id="statEnLigne">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                <div>
+                    <div class="stat-label">Présentiel</div>
+                    <div class="stat-value" id="statPresentiel">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main table card -->
+    <div class="main-card">
+        <div class="main-card-header">
+            <h4>
+                <i class="fas fa-layer-group me-2" style="opacity:0.4; font-size:0.95rem;"></i>
+                Liste des Formations
+            </h4>
+            <a href="nouvelle-formation.html" class="btn-add">
+                <i class="fas fa-plus"></i> Ajouter
+            </a>
+        </div>
+
+        <div class="p-3" style="border-bottom: 1px solid var(--border);">
+            <div class="search-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Rechercher une formation…">
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Formation</th>
+                        <th>Type</th>
+                        <th>Durée</th>
+                        <th>Date Début</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
